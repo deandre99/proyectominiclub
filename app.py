@@ -391,7 +391,8 @@ import qrcode
 from io import BytesIO
 
 # 1) URL pública CORRECTA de tu app en Streamlit
-APP_URL = "https://proyectominiclub-deandre99.streamlit.app"
+APP_URL = "https://www.google.com"
+
 
 # 2) Función para generar el QR
 def make_qr_bytes(url: str, box_size: int = 6):
@@ -412,4 +413,5 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
+
 
