@@ -398,13 +398,15 @@ def make_qr_bytes(url: str, box_size: int = 6):
     return buf
 
 # URL pública de la app para el QR
-url_qr = "https://proyectominiclub-deandre99.streamlit.app"
+APP_URL = "https://proyectominiclub-deandre99.streamlit.app"
 
 # Generar el código QR
-qr_buf = make_qr_bytes(url_qr, box_size=6)
+qr_buf = make_qr_bytes(APP_URL, box_size=6)
 
 # Mostrar el QR en la barra lateral
 with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
-    st.caption(url_qr)
+    st.caption(APP_URL)
+
+
