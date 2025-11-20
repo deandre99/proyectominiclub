@@ -402,7 +402,8 @@ def make_qr_bytes(url: str, box_size: int = 6):
     return buf
 
 # URL correcta de tu app pública:
-URL_PUBLICA = "https://proyectominiclub-deandre99.streamlit.app"
+URL_PUBLICA = st.secrets.get("APP_URL", "https://proyectominiclub-deandre99.streamlit.app")
+
 
 qr_buf = make_qr_bytes(URL_PUBLICA, box_size=6)
 
@@ -420,6 +421,7 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
+
 
 
 
