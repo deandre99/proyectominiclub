@@ -391,7 +391,7 @@ import qrcode
 from io import BytesIO
 
 # URL pública definitiva de tu app
-APP_URL = "https://proyectominiclub-deandre99.streamlit.app"
+APP_URL = "https://2sencarcnfhwtu5sqcelv4.streamlit.app/"
 
 def make_qr_bytes(url: str, box_size: int = 6):
     qr = qrcode.QRCode(border=2, box_size=box_size)
@@ -410,3 +410,4 @@ with st.sidebar:
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
     st.markdown(f"[Abrir MiniClub en este dispositivo]({APP_URL})")
+
