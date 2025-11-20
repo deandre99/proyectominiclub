@@ -401,17 +401,8 @@ def make_qr_bytes(url: str, box_size: int = 6):
     buf.seek(0)
     return buf
 
-# URL correcta de tu app pública:
-URL_PUBLICA = st.secrets.get("APP_URL", "https://proyectominiclub-deandre99.streamlit.app")
-
-
-qr_buf = make_qr_bytes(URL_PUBLICA, box_size=6)
-
-with st.sidebar:
-    st.markdown("### Acceso rápido (QR)")
-    st.image(qr_buf, width=160)
-    st.caption(URL_PUBLICA)
-
+# URL pública CORRECTA de tu app en Streamlit
+APP_URL = "https://proyectominiclub-deandre99.streamlit.app"
 
 # Generar el código QR
 qr_buf = make_qr_bytes(APP_URL, box_size=6)
@@ -421,6 +412,7 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
+
 
 
 
