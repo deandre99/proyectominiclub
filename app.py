@@ -387,6 +387,10 @@ elif menu == "Ver ranking":
 # ==============================
 # ACCESO RÁPIDO (QR)
 # ==============================
+
+import qrcode
+from io import BytesIO
+
 def make_qr_bytes(url: str, box_size: int = 6):
     qr = qrcode.QRCode(border=2, box_size=box_size)
     qr.add_data(url)
@@ -397,8 +401,16 @@ def make_qr_bytes(url: str, box_size: int = 6):
     buf.seek(0)
     return buf
 
-# URL pública de la app para el QR
-APP_URL = "https://proyectominiclub-deandre99.streamlit.app"
+# URL correcta de tu app pública:
+URL_PUBLICA = "https://proyectominiclub-deandre99.streamlit.app"
+
+qr_buf = make_qr_bytes(URL_PUBLICA, box_size=6)
+
+with st.sidebar:
+    st.markdown("### Acceso rápido (QR)")
+    st.image(qr_buf, width=160)
+    st.caption(URL_PUBLICA)
+
 
 # Generar el código QR
 qr_buf = make_qr_bytes(APP_URL, box_size=6)
@@ -408,5 +420,6 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
+
 
 
