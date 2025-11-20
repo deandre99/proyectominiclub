@@ -32,7 +32,6 @@ SCORES_FILE = "scores.csv"
 # CONFIG GOOGLE SHEETS
 # ==============================
 USE_GOOGLE_SHEETS = True
-GOOGLE_CREDS_FILE = "service_account.json"
 GOOGLE_SHEET_NAME = "MiniClub_Scores"
 GOOGLE_WORKSHEET = "Scores"
 
@@ -69,7 +68,7 @@ init_files()
 # FUNCIONES GOOGLE SHEETS
 # ==============================
 def get_gsheet_client():
-    """Devuelve cliente de gspread si está configurado."""
+    """Devuelve cliente de gspread si está configurado usando credenciales en st.secrets."""
     if not USE_GOOGLE_SHEETS:
         return None
     try:
@@ -78,8 +77,12 @@ def get_gsheet_client():
             "https://www.googleapis.com/auth/drive"
         ]
 
-        creds = Credentials.from_service_account_file(
-            GOOGLE_CREDS_FILE,
+        # Leer el diccionario de credenciales desde secrets.toml
+        creds_info = dict(st.secrets["gcp_service_account"])
+
+        # Crear credenciales desde el diccionario (no usamos archivo .json)
+        creds = Credentials.from_service_account_info(
+            creds_info,
             scopes=scopes
         )
 
@@ -384,9 +387,6 @@ elif menu == "Ver ranking":
 # ==============================
 # ACCESO RÁPIDO (QR)
 # ==============================
-import qrcode
-from io import BytesIO
-
 def make_qr_bytes(url: str, box_size: int = 6):
     qr = qrcode.QRCode(border=2, box_size=box_size)
     qr.add_data(url)
@@ -397,8 +397,7 @@ def make_qr_bytes(url: str, box_size: int = 6):
     buf.seek(0)
     return buf
 
-# antes de mostrar el QR, decide la URL
-# Usamos directamente la URL pública de la app
+# URL pública de la app para el QR
 url_qr = "https://proyectominiclub-deandre99.streamlit.app"
 
 # Generar el código QR
@@ -409,7 +408,3 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(url_qr)
-
-
-
-
