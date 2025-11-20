@@ -383,14 +383,13 @@ elif menu == "Ver ranking":
             mostrar = df[["pos", "fecha", "nombre_mostrar", "email", "total"]].head(50)
             st.write("Menor número de golpes = mejor posición.")
             st.dataframe(mostrar, hide_index=True)
-
 # ==============================
 # ACCESO RÁPIDO (QR)
 # ==============================
 import qrcode
 from io import BytesIO
 
-# URL pública definitiva de tu app
+# URL pública definitiva de tu app (la que ves en el navegador)
 APP_URL = "https://2sencarcnfhwtu5sqcelv4.streamlit.app/"
 
 def make_qr_bytes(url: str, box_size: int = 6):
@@ -409,5 +408,3 @@ with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(APP_URL)
-    st.markdown(f"[Abrir MiniClub en este dispositivo]({APP_URL})")
-
