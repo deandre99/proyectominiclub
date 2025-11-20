@@ -398,10 +398,11 @@ def make_qr_bytes(url: str, box_size: int = 6):
     return buf
 
 # antes de mostrar el QR, decide la url (buscar en secrets o usar localhost)
-url_qr = st.secrets.get("APP_URL", "http://localhost:8501")
+url_qr = st.secrets.get(APP_URL = "https://proyectominiclub-deandre99.streamlit.app")
 qr_buf = make_qr_bytes(url_qr, box_size=6)
 
 with st.sidebar:
     st.markdown("### Acceso rápido (QR)")
     st.image(qr_buf, width=160)
     st.caption(url_qr)
+
